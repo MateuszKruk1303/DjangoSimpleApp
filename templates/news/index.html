@@ -1,0 +1,23 @@
+{% extends "navigation.html" %} {% block content %} {% if news %}
+<ul>
+  {% for n in news %}
+  <li style="display: flex">
+    <a href="/news/{{n.id}}/">{{n.topic}}</a>
+    {% if user.is_authenticated %}
+    <form action="{{n.topic}}/delete/" method="delete">
+      <button type="submit" style="color: red; margin-left: 10px">
+        Delete
+      </button>
+    </form>
+    <form action="{{n.topic}}/edit/" method="post">
+      <input id="new_topic" type="text" name="new_topic" />
+      {% csrf_token %}
+      <input type="submit" value="edit" />
+    </form>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No news are available.</p>
+{% endif %} {% endblock %}

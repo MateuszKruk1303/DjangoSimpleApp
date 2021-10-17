@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'news.apps.NewsConfig',  #Enable news model
+    'authentication.apps.AuthenticationConfig', #Enable auth
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
