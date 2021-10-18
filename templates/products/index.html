@@ -1,0 +1,33 @@
+{% extends "navigation.html" %} {% block content %}
+<div>
+  <ul>
+    {% for n in products %}
+    <li style="display: flex">
+      <a href="/products/{{n.id}}/">{{n.name}}</a>
+      {% if user.is_authenticated %}
+      <form action="{{n.name}}/delete/" method="delete">
+        <button type="submit" style="color: red; margin-left: 10px">
+          Delete
+        </button>
+      </form>
+      <form action="{{n.name}}/edit/" method="post">
+        <input id="new_name" type="text" name="new_name" />
+        {% csrf_token %}
+        <input type="submit" value="edit name" />
+      </form>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  <div style="margin-top: 40px">
+    <h1>Add product</h1>
+    <form action="/products/add/" method="post">
+      <input id="product_name" type="text" name="name" />
+      <input id="product_price" type="text" name="price" />
+      {% csrf_token %}
+      <input type="submit" value="Add Product" />
+    </form>
+  </div>
+</div>
+
+{% endblock %}
